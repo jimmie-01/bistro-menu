@@ -1,0 +1,20 @@
+<html lang="en">
+<%- include('./partials/header.ejs') %>
+<body>
+	<%- include('./partials/nav.ejs') %>
+	<div class="menu content">
+		<% if(items.length > 0)  {%>
+			<% items.forEach(item => <%{%>
+				<h2><%= item.category %></h2>
+				<a class="single" href="/menu/<%= item._id%>">
+					<h3 class="title"><%= item.name%></h3>
+					<p class="snippet"><%= item.description%></p>
+				</a>
+			<%})%>
+		<% } else  {%>
+			<p>There is nothing to dispaly....</p>
+		<% } %>
+	</div>
+	<%- include('./partials/footer.ejs') %>
+</body>
+</html>
