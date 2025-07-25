@@ -3,9 +3,19 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mainRoutes = require('./routes/mainRoute');
+const { default: mongoose } = require('mongoose');
 
 const PORT = process.env.PORT || 3000;
 
+//Connect to DataBase
+dbURI = process.env.dbURI;
+mongoose.connect(dbURI)
+	.then(result => app.listen(PORT, () => {
+		console.log(`Connect to DataBase on port ${PORT}`);
+	}))
+	.catch(err => {
+		console.log(err);
+	});
 //View Engines
 app.set('view engine', 'ejs');
 
@@ -13,7 +23,3 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.use('', mainRoutes);
-
-app.listen(PORT, () => {
-	console.log("Express app Connected");
-})
