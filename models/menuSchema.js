@@ -5,8 +5,8 @@ const menuSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
-		enum: ['Breakfast', 'Fish', 'Poultry', 'Meat', 'Comfort', 'Salad', 'Sandwich', 'Dessert', 'Sides'],
-		lowercase: true,
+		enum: ['BREAKFAST', 'FISH', 'POULTRY', 'MEAT', 'COMFORT', 'SALAD', 'SANDWICH', 'DESSERT', 'SIDES'],
+		uppercase: true,
 		trim: true
 	},
 	name: {
@@ -23,11 +23,11 @@ const menuSchema = new Schema({
 	},
 	price: {
 		type: Number,
-		required: true,
+		required: false,
 		min: 0
 	}
 }, { timestamps: true });
 
 const MenuItem = mongoose.model('MenuItem', menuSchema);
 
-module.exports = Items;
+module.exports = MenuItem;
