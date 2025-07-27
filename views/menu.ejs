@@ -2,19 +2,25 @@
 <%- include('./partials/header.ejs') %>
 <body>
 	<%- include('./partials/nav.ejs') %>
-	<div class="menu content">
-		<% if(items.length > 0)  {%>
-			<% items.forEach(item => <%{%>
-				<h2><%= item.category %></h2>
-				<a class="single" href="/menu/<%= item._id%>">
-					<h3 class="title"><%= item.name%></h3>
-					<p class="snippet"><%= item.description%></p>
-				</a>
-			<%})%>
-		<% } else  {%>
-			<p>There is nothing to dispaly....</p>
-		<% } %>
-	</div>
+	<% Object.keys(itemsByCategory).forEach(category =>{ %>
+		<div class="category-section">
+			<h2 class="category"><%= category %></h2>
+
+			<div class="items-container">
+				<% itemsByCategory[category].forEach(item => { %>
+					<div class="item-card">
+						<h3><%= item.name %></h3>
+						<p><%= item.description %></p>
+						<p><strong>Price:</strong><%= item.price.toFixed(2)%></p>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	<%}) %>
+	<% if (Object.keys(itemsByCategory).length === 0) {%>
+		<p>No items found!</p>
+	<%}%>
+
 	<%- include('./partials/footer.ejs') %>
 </body>
 </html>

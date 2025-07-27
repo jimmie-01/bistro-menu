@@ -17,8 +17,25 @@ module.exports.get_about = (req, res) => {
 /**
  * GET - Get Menu List
  */
-module.exports.get_menu = (req, res) => {
-	res.render('menu', { title: "Menu" });
+module.exports.get_menu = async(req, res) => {
+	try {
+		//Fetch items from DB and sort by category
+		const items = await MenuItem.find().sort({ category: 1 });
+
+		//Group items by category
+		const itemsByCategory = {};
+		items.forEach(item => {
+			if (!itemsByCategory[item.category]) {
+				itemsByCategory[item.category] = [];
+			}
+			itemsByCategory[item.category].push(item);
+		});
+		res.status(201).render('menu', { 
+			title: "Menu", 
+			itemsByCategory });
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 /**
@@ -33,9 +50,7 @@ module.exports.get_create_menu = (req, res) => {
  */
 module.exports.post_create_menu = async (req, res) => {
 	try {
-		const { category, name, description, price } = req.body
-		console.log("Received Data", req.body);
-		console.log("Raw Price", req.body.price);
+		const { category, name, description, price } = req.body;
 
 		const nameExist = await MenuItem.findOne({ name });
 
@@ -52,5 +67,5 @@ module.exports.post_create_menu = async (req, res) => {
 		console.log('data added to db');
 	} catch (error) {
 		console.log(error);
-	}
+	};
 }
