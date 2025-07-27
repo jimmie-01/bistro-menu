@@ -33,7 +33,9 @@ module.exports.get_create_menu = (req, res) => {
  */
 module.exports.post_create_menu = async (req, res) => {
 	try {
-		const {category, name, description, price } = req.body
+		const { category, name, description, price } = req.body
+		console.log("Received Data", req.body);
+		console.log("Raw Price", req.body.price);
 
 		const nameExist = await MenuItem.findOne({ name });
 
