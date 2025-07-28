@@ -63,7 +63,7 @@ module.exports.post_create_menu = async (req, res) => {
 			description,
 			price
 		});
-		res.status(201).json(menu_items);
+		res.status(201).redirect('/menu');
 		console.log('data added to db');
 	} catch (error) {
 		console.log(error);
