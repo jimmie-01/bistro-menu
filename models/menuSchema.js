@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const menuSchema = new Schema({
+const foodMenuSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
@@ -27,6 +27,34 @@ const menuSchema = new Schema({
 	}
 }, { timestamps: true });
 
-const MenuItem = mongoose.model('MenuItem', menuSchema);
+const drinkMenuSchema = new Schema({
+	category: {
+		type: String,
+		required: true,
+		enum: ['SODAS', 'JUICES', 'SMOOTHIES', 'MILKSHAKE', 'HOT BEVERAGE', 'COCKTAILS', 'SIGNATURE DRINKS'],
+		uppercase: true,
+		trim: true
+	},
+	name: {
+		type: String,
+		required: true,
+		trim: true,
+		maxlength: 100
+	},
+	description: {
+		type: String,
+		required: false,
+		trim: true,
+		maxlength: 500
+	},
+	price: {
+		type: Number,
+		required: true,
+	}
+}, { timestamps: true });
 
-module.exports = MenuItem;
+
+const MenuItem = mongoose.model('MenuItem', foodMenuSchema);
+const DrinkMenu = mongoose.model('DrinkMenu', drinkMenuSchema);
+
+module.exports = { MenuItem, DrinkMenu };

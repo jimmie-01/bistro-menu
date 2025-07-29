@@ -1,4 +1,4 @@
-const MenuItem = require('../models/menuSchema');
+const foodMenuItem = require('../models/menuSchema');
 
 /**
  * GET - Get Home Page
@@ -15,12 +15,12 @@ module.exports.get_about = (req, res) => {
 }
 
 /**
- * GET - Get Menu List
+ * GET - Get Food Menu List
  */
-module.exports.get_menu = async(req, res) => {
+module.exports.get_menu_food = async(req, res) => {
 	try {
 		//Fetch items from DB and sort by category
-		const items = await MenuItem.find().sort({ category: 1 });
+		const items = await foodMenuItem.find().sort({ category: 1 });
 
 		//Group items by category
 		const itemsByCategory = {};
@@ -39,6 +39,13 @@ module.exports.get_menu = async(req, res) => {
 }
 
 /**
+ * GET - Get Drinks Menu List
+ */
+module.exports.get_menu_drinks = (req, res) => {
+
+}
+
+/**
  * GET - Create Menu Page
  */
 module.exports.get_create_menu = (req, res) => {
@@ -52,12 +59,12 @@ module.exports.post_create_menu = async (req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
-		const nameExist = await MenuItem.findOne({ name });
+		const nameExist = await foodMenuItem.findOne({ name });
 
 		if (nameExist) {
 			return res.status(409).json({ message: "Item with name already exists"});
 		}
-		const menu_items = await MenuItem.create({
+		const menu_items = await foodMenuItem.create({
 			category,
 			name,
 			description,
