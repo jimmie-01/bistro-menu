@@ -38,33 +38,9 @@ module.exports.get_menu_food = async(req, res) => {
 	}
 }
 
-/**
- * GET - Get Drinks Menu List
- */
-module.exports.get_menu_drinks = async(req, res) => {
-
-	try {
-		const items = await DrinkMenu.find().sort({ category: 1 });
-
-	//Group items by category
-		const itemsByCategory = {};
-		items.forEach(item => {
-			if(!itemsByCategory[item.category]) {
-				itemsByCategory[item.category] = [];
-		}
-		itemsByCategory[item.category].push(item);
-	});
-	res.status(201).render('drinks', {
-		title: 'drinks',
-		itemsByCategory
-	});
-	} catch (error) {
-		console.log(error);
-	}
-}
 
 /**
- * GET - Create Menu Page
+ * GET - Create Menu Page(Food)
  */
 module.exports.get_create_menu = (req, res) => {
 	res.render('create', { title: "Add item" });
@@ -93,4 +69,55 @@ module.exports.post_create_menu = async (req, res) => {
 	} catch (error) {
 		console.log(error);
 	};
+}
+
+
+/**
+ * GET - Get Drinks Menu List
+ */
+module.exports.get_menu_drinks = async(req, res) => {
+
+	try {
+		const items = await DrinkMenu.find().sort({ category: 1 });
+
+	//Group items by category
+		const itemsByCategory = {};
+		items.forEach(item => {
+			if(!itemsByCategory[item.category]) {
+				itemsByCategory[item.category] = [];
+		}
+		itemsByCategory[item.category].push(item);
+	});
+	res.status(201).render('drinks', {
+		title: 'drinks',
+		itemsByCategory
+	});
+	} catch (error) {
+		console.log(error);
+	};
+}
+
+/**
+ * GET - Get Form for drinks menu
+ */
+
+module.exports.get_create_drinks = async(req, res) => {
+	try {
+		const { category, name, description, price } = req.body;
+
+		const ifItemExists = await DrinkMenu.findOne({ name });
+
+	if (ifItemExists) {
+		return res.status(407).json({ message: "Item Already Exists"});
+	};
+	const item = await DrinkMenu.create({
+		category,
+		name,
+		description,
+		price
+	});
+	res.status(201).redirect('/menu/drinks');	
+	} catch (error) {
+		console.log(error);
+	}
 }
