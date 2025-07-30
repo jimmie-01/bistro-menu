@@ -3,6 +3,13 @@
 <body>
 	<%- include('./partials/nav.ejs') %>
 	<div class="create-menu content">
+		<nav>
+			<ul>
+				<li><a href="#">Food</a></li>
+				<li><a href="/menu/create/drinks">Drinks</a></li>
+			</ul>
+		</nav>
+		<h2>Food Menu Form</h2>
 		<form action="/menu/create/food" method="POST">
 			<label for="category">Category:</label>
 			<input type="text" id="" name="category" required>

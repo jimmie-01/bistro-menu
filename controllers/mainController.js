@@ -98,10 +98,17 @@ module.exports.get_menu_drinks = async(req, res) => {
 }
 
 /**
- * GET - Get Form for drinks menu
+ * GET - Get Drinks Data Form
+ */
+module.exports.get_create_drinks = (req, res) => {
+	res.render('create_drink', { title: 'Drinks Form' });
+}
+
+/**
+ * POST - Post drinks data to db
  */
 
-module.exports.get_create_drinks = async(req, res) => {
+module.exports.post_create_drinks = async(req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
