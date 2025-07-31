@@ -112,19 +112,22 @@ module.exports.post_create_drinks = async(req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
+		console.log("Incoming Request: ", req.body);
+
+		// Checks if item with the same name already exist on DB
 		const ifItemExists = await DrinkMenu.findOne({ name });
 
-	if (ifItemExists) {
-		return res.status(407).json({ message: "Item Already Exists"});
-	};
-	const item = await DrinkMenu.create({
-		category,
-		name,
-		description,
-		price
-	});
-	res.status(201).redirect('/menu/drinks');	
-	} catch (error) {
-		console.log(error);
-	}
+		if (ifItemExists) {
+			return res.status(409).json({ message: "Item Already Exists"});
+		};
+		const item = await DrinkMenu.create({
+			category,
+			name,
+			description,
+			price
+		});
+		res.status(201).redirect('/menu/drinks');	
+		} catch (error) {
+			console.log(error);
+		}
 }
