@@ -53,6 +53,10 @@ module.exports.post_create_menu = async (req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
+		const checkCategory = await MenuItem.findOne({ category })
+			if (!checkCategory){
+				return res.status(409).json({ message: " The Category you entered does not belong in the food group"});
+			}
 		const nameExist = await MenuItem.findOne({ name });
 
 		if (nameExist) {
@@ -64,7 +68,7 @@ module.exports.post_create_menu = async (req, res) => {
 			description,
 			price
 		});
-		res.status(201).redirect('/menu');
+		res.status(201).redirect('/menu/food');
 		console.log('data added to db');
 	} catch (error) {
 		console.log(error);
@@ -113,6 +117,12 @@ module.exports.post_create_drinks = async(req, res) => {
 		const { category, name, description, price } = req.body;
 
 		console.log("Incoming Request: ", req.body);
+
+		//Check if category is in the right group
+		const checkCategory = await MenuItem.findOne({ category })
+			if (!checkCategory){
+				return res.status(409).json({ message: " The Category you entered does not belong in the drinks group"});
+			}
 
 		// Checks if item with the same name already exist on DB
 		const ifItemExists = await DrinkMenu.findOne({ name });
