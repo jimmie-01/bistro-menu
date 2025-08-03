@@ -125,7 +125,7 @@ module.exports.post_create_drinks = async(req, res) => {
 		// 		return res.status(409).json({ message: " The Category you entered does not belong in the drinks group"});
 		// 	}
 		if (!isValidEnumValue(DrinkMenu.schema, 'category', category)) {
-			return res.status(409).json({ maassage: "The Category You Entered Is Not Valid For Drinks!"})
+			return res.status(409).json({ message: "The Category You Entered Is Not Valid For Drinks!"})
 		}
 
 		// Checks if item with the same name already exist on DB
