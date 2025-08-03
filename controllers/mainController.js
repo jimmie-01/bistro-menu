@@ -54,10 +54,10 @@ module.exports.post_create_menu = async (req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
-		const checkCategory = await MenuItem.findOne({ category })
-			if (!checkCategory){
-				return res.status(409).json({ message: " The Category you entered does not belong in the food group"});
-			}
+		// Check Items are been entered into the correct category
+		if(!isValidEnumValue(DrinkMenu.schema, 'category', category)) {
+			return res.status(409).json({ message: "The Category You Entered Is Not Valid For Food!"});
+		}
 		const nameExist = await MenuItem.findOne({ name });
 
 		if (nameExist) {
