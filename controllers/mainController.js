@@ -1,4 +1,5 @@
 const { MenuItem, DrinkMenu } = require('../models/menuSchema');
+const isValidEnumValue = require('../utils/utils');
 
 /**
  * GET - Get Home Page
@@ -119,10 +120,13 @@ module.exports.post_create_drinks = async(req, res) => {
 		console.log("Incoming Request: ", req.body);
 
 		//Check if category is in the right group
-		const checkCategory = await MenuItem.findOne({ category })
-			if (!checkCategory){
-				return res.status(409).json({ message: " The Category you entered does not belong in the drinks group"});
-			}
+		// const checkCategory = await MenuItem.findOne({ category })
+		// 	if (!checkCategory){
+		// 		return res.status(409).json({ message: " The Category you entered does not belong in the drinks group"});
+		// 	}
+		if (!isValidEnumValue(DrinkMenu.schema, 'category', category)) {
+			return res.status(409).json({ maassage: "The Category You Entered Is Not Valid For Drinks!"})
+		}
 
 		// Checks if item with the same name already exist on DB
 		const ifItemExists = await DrinkMenu.findOne({ name });
