@@ -5,5 +5,5 @@ const { MenuItem, DrinkMenu } = require('../models/menuSchema');
  */
 
 module.exports.get_dashboard  = (req, res) => {
-	res.send('Our Dashboard is Ready !');
+	res.render('admin/dashBoard', { title: "Admin Panel" });
 }
