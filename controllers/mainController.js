@@ -78,8 +78,9 @@ module.exports.post_create_menu = async (req, res) => {
 	try {
 		const { category, name, description, price } = req.body;
 
+		const upperCategory = category.toUpperCase();
 		// Check Items are been entered into the correct category
-		if(isValidEnumValue(MenuItem.schema, 'category', category)) {
+		if(isValidEnumValue(MenuItem.schema, 'category', upperCategory)) {
 			const foodItemExists = await MenuItem.findOne({ name });
 			
 			if(foodItemExists) {
@@ -93,7 +94,7 @@ module.exports.post_create_menu = async (req, res) => {
 			});
 			res.status(201).redirect('/menu/food');
 			console.log('data added to db');
-		} else if(isValidEnumValue(DrinkMenu.schema, 'category', category)) {
+		} else if(isValidEnumValue(DrinkMenu.schema, 'category', upperCategory)) {
 			const drinkItemExists = await DrinkMenu.findOne({ name });
 
 			if(drinkItemExists) {

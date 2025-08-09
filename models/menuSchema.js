@@ -5,7 +5,7 @@ const foodMenuSchema = new Schema({
 	category: {
 		type: String,
 		required: true,
-		enum: ['BREAKFAST', 'FISH', 'POULTRY', 'MEAT', 'PASTA', 'COMFORT', 'SALAD', 'SANDWICH', 'DESSERT', 'SIDES'],
+		enum: ['BREAKFAST', 'FISH', 'POULTRY', 'MEAT', 'PASTA', 'COMFORT', 'SALAD', 'SANDWICH', 'DESSERT', 'SIDES', 'LIGHT EATS'],
 		uppercase: true,
 		trim: true
 	},

@@ -6,7 +6,7 @@ const { MenuItem, DrinkMenu } = require('../models/menuSchema');
 
 module.exports.get_dashboard  = async(req, res) => {
 	try {
-		const Items = await MenuItem.find().sort({ category: 1 });
+		const items = await MenuItem.find().sort({ category: 1 });
 		
 		const itemsByCategory = {};
 		items.forEach(item => {

@@ -4,12 +4,17 @@
 	<%- include('../partials/adminNav.ejs') %>
 	<h2>Menu Section</h2>
 	<nav>
-		<li><a href="">Food</a></li>
-		<li><a href="">Drinks</a></li>
+		<li><a href="/dashboard">Food</a></li>
+		<li><a href="/dashboard/drinks">Drinks</a></li>
 	</nav>
-	<div>
-
-	</div>
+	<% Object.keys(itemsByCategory).forEach(category=> { %>
+		<div class="category-section">
+			<h2><a href=""><%= category %></a></h2>
+		</div>
+	<% }) %>
+	<% if(Object.keys(itemsByCategory).length === 0) { %>
+		<p>There Is Nothing To Dispaly</p>
+	<% } %>
 	<%- include('../partials/footer.ejs') %>
 </body>
 </html>
