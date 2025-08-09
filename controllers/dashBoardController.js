@@ -1,7 +1,7 @@
 const { MenuItem, DrinkMenu } = require('../models/menuSchema');
 
 /**
- * GET - Get Dashboard Panel
+ * GET - Get Admin Panel
  */
 
 module.exports.get_dashboard  = async(req, res) => {
@@ -17,6 +17,30 @@ module.exports.get_dashboard  = async(req, res) => {
 		});
 		res.render('admin/dashBoard', {
 			 title: "Admin Panel",
+			 itemsByCategory
+			});
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+/**
+ * GET - Get Admin Panel For Drink
+ */
+
+module.exports.get_dashboard_drinks = async(req, res) => {
+	try {
+		const items = await DrinkMenu.find().sort({ category: 1 });
+		
+		const itemsByCategory = {};
+		items.forEach(item => {
+			if(!itemsByCategory[item.category]){
+				itemsByCategory[item.category] = [];
+			}
+			itemsByCategory[item.category].push(item);
+		});
+		res.render('admin/dashBoardDrinks', {
+			 title: "Drinks",
 			 itemsByCategory
 			});
 	} catch (error) {
