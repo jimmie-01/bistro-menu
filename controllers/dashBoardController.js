@@ -59,8 +59,9 @@ module.exports.get_category_items = async(req, res) => {
 
 		const items = await MenuItem.find({ category }).sort({category: 1});
 		console.log("Items this category: ", items);
-		res.status(201).render('details', {
+		res.status(201).render('admin/details', {
 			title: category,
+			category,
 			items
 		});
 	} catch (error) {
@@ -79,8 +80,9 @@ module.exports.get_category_drinkItems = async(req, res) => {
 
 		const items = await DrinkMenu.find({ category }).sort({category: 1});
 		console.log("Items this category: ", items);
-		res.status(201).render('details', {
+		res.status(201).render('admin/details', {
 			title: category,
+			category,
 			items
 		});
 	} catch (error) {
