@@ -47,3 +47,16 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 		console.log(error);
 	}
 }
+
+/**
+ * GET - Get All Items For Each Category
+ */
+
+module.exports.get_category_items = async(req, res) => {
+	try {
+		const category = req.params.category;
+		console.log('Incoming Request: ', category);
+	} catch (error) {
+		console.log(error);
+	}
+}
