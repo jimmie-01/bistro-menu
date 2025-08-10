@@ -49,14 +49,41 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 }
 
 /**
- * GET - Get All Items For Each Category
+ * GET - Get All Items For Each Category In The Food Section
  */
 
 module.exports.get_category_items = async(req, res) => {
 	try {
 		const category = req.params.category;
 		console.log('Incoming Request: ', category);
+
+		const items = await MenuItem.find({ category }).sort({category: 1});
+		console.log("Items this category: ", items);
+		res.status(201).render('details', {
+			title: category,
+			items
+		});
 	} catch (error) {
 		console.log(error);
-	}
+	};
+}
+
+/**
+ * GET - Get All Items For Each Category In The Drinks Section
+ */
+
+module.exports.get_category_drinkItems = async(req, res) => {
+	try {
+		const category = req.params.category;
+		console.log('Incoming Request: ', category);
+
+		const items = await DrinkMenu.find({ category }).sort({category: 1});
+		console.log("Items this category: ", items);
+		res.status(201).render('details', {
+			title: category,
+			items
+		});
+	} catch (error) {
+		console.log(error);
+	};
 }
