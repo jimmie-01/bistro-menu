@@ -9,7 +9,7 @@
 	</nav>
 	<% Object.keys(itemsByCategory).forEach(category=> { %>
 		<div class="category-section">
-			<h2><a href="/dashboard/<%= category %>"><%= category %></a></h2>
+			<h2><a href="/dashboard/drinks/<%= category %>"><%= category %></a></h2>
 		</div>
 	<% }) %>
 	<% if(Object.keys(itemsByCategory).length === 0) { %>
