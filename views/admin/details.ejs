@@ -2,11 +2,22 @@
 <%- include('../partials/header.ejs') %>
 <body>
 	<h2><%= category %></h2>
-	<% items.forEach(item => { %>
+	<div class="section-details">
+		<% items.forEach(item => { %>
 		<h3><%= item.name %></h3>
 		<p><%= item.description %></p>
 		<p>₦<%= item.price.toFixed(2)%></p>
+
+		<div class="admin-post-controls">
+		<a href="" class="btn">Edit</a>
+
+		<form action="" method="POST">
+			<input type="submit" value="Delete" class="btn">
+		</form>
+	</div>
 	<% }) %>
+	</div>
+
 	<%- include('../partials/footer.ejs') %>
 </body>
 </html>
