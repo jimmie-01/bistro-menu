@@ -1,6 +1,7 @@
 <html lang="en">
 <%- include('../partials/header.ejs') %>
 <body>
+	<%- include('../partials/admin-nav.ejs') %>
 	<h2><%= category %></h2>
 	<div class="section-details">
 		<% items.forEach(item => { %>
@@ -8,13 +9,15 @@
 		<p><%= item.description %></p>
 		<p>₦<%= item.price.toFixed(2)%></p>
 
-		<div class="admin-post-controls">
-		<a href="" class="btn">Edit</a>
-
-		<form action="" method="POST">
-			<input type="submit" value="Delete" class="btn">
-		</form>
-	</div>
+		<div class="operation-btn">
+			<br>
+			<form action="/edit/:name/" method="edit">
+				<button type="submit">Edit</button>
+			</form>
+			<form action="" method="POST">
+				<button type="submit">Delete</button>
+			</form>
+		</div>
 	<% }) %>
 	</div>
 

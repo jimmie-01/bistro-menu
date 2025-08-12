@@ -1,0 +1,24 @@
+<html lang="en">
+<body>
+<%- include('../partials/admin-nav.ejs') %>
+	<h2>Edit Menu Item</h2>
+	<div class="create-menu content">
+		<form action="/menu/create" method="POST">
+			<label for="category">Category:</label>
+			<input type="text" value="<%= item.category %>" id="" name="category" required>
+			<label for="name">Name:</label>
+			<input type="text" value="<%= item.name %>" id="name" name="name" required>
+			<label for="description">Description:</label>
+			<input type="text" value="<%= item.description %>" id="description" name="description" >
+			<label for="price">Price:</label>
+			<input type="number" value="<%= item.price %>" id="price" name="price" required>
+
+			<div class="sub">
+				<button type="submit">Update</button>
+			</div>
+		</form>
+	</div>
+
+<%- include('../partials/footer.ejs') %>
+</body>
+</html>

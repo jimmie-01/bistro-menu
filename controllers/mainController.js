@@ -79,7 +79,7 @@ module.exports.post_create_menu = async (req, res) => {
 		const { category, name, description, price } = req.body;
 
 		const upperCategory = category.toUpperCase();
-		// Check Items are been entered into the correct category
+		// Check if category is a valid enum type
 		if(isValidEnumValue(MenuItem.schema, 'category', upperCategory)) {
 			const foodItemExists = await MenuItem.findOne({ name });
 			

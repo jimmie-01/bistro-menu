@@ -89,3 +89,17 @@ module.exports.get_category_drinkItems = async(req, res) => {
 		console.log(error);
 	};
 }
+
+/**
+ * GET - Get The Page To Edit Menu Item
+ */
+module.exports.get_edit_item = (req, res) => {
+	try {
+		 const name  = req.params.name;
+
+		console.log("What's In Here: ", name);
+		
+	} catch (error) {
+		console.log(error);
+	}
+}
