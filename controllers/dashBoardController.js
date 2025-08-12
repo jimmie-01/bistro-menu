@@ -107,5 +107,27 @@ module.exports.get_edit_item = async(req, res) => {
 			});
 	} catch (error) {
 		res.status(501).send("Internal Sever Error", error);
-	}
+	};
+}
+
+/**
+ * POST - Update Items
+ */
+module.exports.post_edit_item = async(req, res) => {
+	try {
+		const id = req.params.id;
+
+		const item = await MenuItem.findByIdAndUpdate({ 
+			_id: id}, 
+			req.body);
+		if (!item) {
+			const item = await DrinkMenu.findByIdAndUpdate({ _id: id},
+				req.body
+			);
+			res.status(201).redirect(`/dashboard/drinks/${item.category}`);
+		}
+		res.status(201).redirect(`/dashboard/${item.category}`);
+	} catch (error) {
+		res.status(501).send("Internal Sever Error", error);
+	};
 }
