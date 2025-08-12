@@ -55,10 +55,8 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 module.exports.get_category_items = async(req, res) => {
 	try {
 		const category = req.params.category;
-		console.log('Incoming Request: ', category);
 
 		const items = await MenuItem.find({ category }).sort({category: 1});
-		console.log("Items this category: ", items);
 		res.status(201).render('admin/details', {
 			title: category,
 			category,
@@ -76,10 +74,8 @@ module.exports.get_category_items = async(req, res) => {
 module.exports.get_category_drinkItems = async(req, res) => {
 	try {
 		const category = req.params.category;
-		console.log('Incoming Request: ', category);
 
 		const items = await DrinkMenu.find({ category }).sort({category: 1});
-		console.log("Items this category: ", items);
 		res.status(201).render('admin/details', {
 			title: category,
 			category,
@@ -93,13 +89,23 @@ module.exports.get_category_drinkItems = async(req, res) => {
 /**
  * GET - Get The Page To Edit Menu Item
  */
-module.exports.get_edit_item = (req, res) => {
+module.exports.get_edit_item = async(req, res) => {
 	try {
-		 const name  = req.params.name;
+		const name = req.params.name;
 
-		console.log("What's In Here: ", name);
-		
+		const item = await MenuItem.findOne({ name });
+		if (!item) {
+			const item = await DrinkMenu.findOne({ name });
+			res.status(201).render('admin/edit-items', {
+				title: "Update Item",
+				item
+			});
+		}
+		res.status(201).render('admin/edit-items', {
+				title: "Update Item",
+				item
+			});
 	} catch (error) {
-		console.log(error);
+		res.status(501).send("Internal Sever Error", error);
 	}
 }
