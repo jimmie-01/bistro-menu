@@ -138,13 +138,15 @@ module.exports.post_edit_item = async(req, res) => {
  */
 module.exports.delete_item = async(req, res) => {
 	try {
-		const id = req.params.id;
-		const item = await MenuItem.deleteOne({_id: id});
+		const category = req.params.category;
+		console.log(category);
+		const name = req.params.name;
+		const item = await MenuItem.deleteOne({ name });
 		if(!item) {
-			const item = await DrinkMenu.deleteOne({_id: id});
-			res.status(201).redirect(`/dashboard/drinks/${item.category}`);
+			const item = await DrinkMenu.deleteOne({ name });
+			res.status(201).redirect('/dashboard/drinks');
 		}
-		res.status(201).redirect(`/dashboard/${item.category}`);
+		res.status(201).redirect('/dashboard');
 	} catch (error) {
 		console.log(error);
 	}

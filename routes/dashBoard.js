@@ -8,6 +8,6 @@ router.get('/dashboard/:category', Controllers.get_category_items);
 router.get('/dashboard/drinks/:category', Controllers.get_category_drinkItems);
 router.get('/edit/:name', Controllers.get_edit_item);
 router.post('/edit/:id', Controllers.post_edit_item);
-router.post('/dashboard/:id', Controllers.delete_item);
+router.post('/dashboard/item/:name', Controllers.delete_item);
 
 module.exports = router;
