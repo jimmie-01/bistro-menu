@@ -1,3 +1,4 @@
+const { request } = require('express');
 const { MenuItem, DrinkMenu } = require('../models/menuSchema');
 
 /**
@@ -47,6 +48,7 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 		console.log(error);
 	}
 }
+
 
 /**
  * GET - Get All Items For Each Category In The Food Section
@@ -130,4 +132,20 @@ module.exports.post_edit_item = async(req, res) => {
 	} catch (error) {
 		res.status(501).send("Internal Sever Error", error);
 	};
+}
+/**
+ * DELETE - Delete an item from dashboard
+ */
+module.exports.delete_item = async(req, res) => {
+	try {
+		const id = req.params.id;
+		const item = await MenuItem.deleteOne({_id: id});
+		if(!item) {
+			const item = await DrinkMenu.deleteOne({_id: id});
+			res.status(201).redirect(`/dashboard/drinks/${item.category}`);
+		}
+		res.status(201).redirect(`/dashboard/${item.category}`);
+	} catch (error) {
+		console.log(error);
+	}
 }
