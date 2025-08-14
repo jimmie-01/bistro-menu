@@ -150,4 +150,4 @@ module.exports.delete_item = async(req, res) => {
 	} catch (error) {
 		console.log(error);
 	}
-}
+};
