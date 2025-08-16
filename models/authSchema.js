@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const authSchema = new Schema({
+const userSchema = new Schema({
   name: {
 	type: String,
 	required: [true, 'Name is required'],
@@ -19,14 +19,14 @@ const authSchema = new Schema({
   },
   role: {
 	type: String,
-	enum: ['user', 'admin'],
+	enum: ['Floor Manager', 'General Manager','Owner', 'Cashier'],
 	default: 'user',
   }
 }, { timestamps: true });
 
-const Auth = mongoose.model('Auth', authSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = Auth;
+module.exports = User;
 // --- IGNORE ---
 
 // This schema defines the structure of the authentication data in the database.
