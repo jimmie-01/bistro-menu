@@ -64,57 +64,6 @@ module.exports.get_menu_drinks = async(req, res) => {
 	};
 }
 
-/**
- * GET - Create Menu Page(Food)
- */
-module.exports.get_create_menu = (req, res) => {
-	res.render('create', { title: "Add item" });
-}
-
-/**
- * POST - Post Create Menu
- */
-module.exports.post_create_menu = async (req, res) => {
-	try {
-		const { category, name, description, price } = req.body;
-
-		const upperCategory = category.toUpperCase();
-		// Check if category is a valid enum type
-		if(isValidEnumValue(MenuItem.schema, 'category', upperCategory)) {
-			const foodItemExists = await MenuItem.findOne({ name });
-			
-			if(foodItemExists) {
-				return res.status(409).json({ message: "Item with name already exists"});
-			}
-			const menu_items = await MenuItem.create({
-				category,
-				name,
-				description,
-				price
-			});
-			res.status(201).redirect('/menu/food');
-			console.log('data added to db');
-		} else if(isValidEnumValue(DrinkMenu.schema, 'category', upperCategory)) {
-			const drinkItemExists = await DrinkMenu.findOne({ name });
-
-			if(drinkItemExists) {
-				return res.status(409).json({ message: "Item with name already exists"});
-			}
-			const drink_items = await DrinkMenu.create({
-				category,
-				name,
-				description,
-				price
-			});
-			res.status(201).redirect('/menu/drinks');
-			console.log('Drink item added to Db');
-		} else {
-			return res.status(409).json({ message: "The Category You Entered Does Not Belong In The Menu!"})
-		}
-	} catch (error) {
-		console.log(error);
-	};
-}
 
 // /**
 //  * GET - Get Drinks Data Form

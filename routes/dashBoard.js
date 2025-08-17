@@ -6,6 +6,8 @@ router.get('/dashboard', Controllers.get_dashboard);
 router.get('/dashboard/drinks', Controllers.get_dashboard_drinks);
 router.get('/dashboard/:category', Controllers.get_category_items);
 router.get('/dashboard/drinks/:category', Controllers.get_category_drinkItems);
+router.get('/menu/add-item', Controllers.get_create_menu);
+router.post('/menu/add-item', Controllers.post_create_menu);
 router.get('/edit/:name', Controllers.get_edit_item);
 router.post('/edit/:id', Controllers.post_edit_item);
 router.post('/dashboard/item/:name', Controllers.delete_item);

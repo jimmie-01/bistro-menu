@@ -2,7 +2,11 @@
 <%- include('../partials/header.ejs') %>
 <body>
 	<%- include('../partials/admin-nav.ejs') %>
-	<h2>Menu Section</h2>
+	<div class="admin-title">
+		<h2>Dashboard</h2>
+		<a href="/menu/add-item" class="button">+ Add New Item</a>
+	</div>
+	
 	<nav>
 		<li><a href="/dashboard">Food</a></li>
 		<li><a href="/dashboard/drinks">Drinks</a></li>
@@ -18,3 +22,8 @@
 	<%- include('../partials/footer.ejs') %>
 </body>
 </html>
+<!-- 
+<div class="admin-title">
+	<h2>Posts</h2>
+	<a href="/add-post" class="button">+ Add New</a>
+</div> -->
