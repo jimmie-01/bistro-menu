@@ -1,5 +1,6 @@
 const { request } = require('express');
 const { MenuItem, DrinkMenu } = require('../models/menuSchema');
+const isValidEnumValue = require('../utils/utils');
 
 /**
  * GET - Get Admin Panel
@@ -51,7 +52,7 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 
 
 /**
- * GET - Get All Items For Each Category In The Food Section
+ * GET - Get All Category In The Food Section
  */
 
 module.exports.get_category_items = async(req, res) => {
@@ -70,7 +71,7 @@ module.exports.get_category_items = async(req, res) => {
 }
 
 /**
- * GET - Get All Items For Each Category In The Drinks Section
+ * GET - Get All Category In The Drinks Section
  */
 
 module.exports.get_category_drinkItems = async(req, res) => {
@@ -116,7 +117,15 @@ module.exports.post_create_menu = async (req, res) => {
 				description,
 				price
 			});
-			res.status(201).redirect('/menu/food');
+			// Redirect to the category page after adding the item
+			// This assumes that the category is a valid route in your application
+			// If you want to redirect to a specific category page, you can modify the URL accordingly
+			// For example, if you want to redirect to the category page:
+			// const lowerCategory = menu_items.category.toLowerCase();
+			// Redirect to the category page after adding the item
+			// This assumes that the category is a valid route in your application
+			// res.status(201).redirect(`/dashboard/${lowerCategory}`);
+			res.status(201).redirect(`/dashboard/${category.toLowerCase}`);
 			console.log('data added to db');
 		} else if(isValidEnumValue(DrinkMenu.schema, 'category', upperCategory)) {
 			const drinkItemExists = await DrinkMenu.findOne({ name });
@@ -130,7 +139,7 @@ module.exports.post_create_menu = async (req, res) => {
 				description,
 				price
 			});
-			res.status(201).redirect('/menu/drinks');
+			res.status(201).redirect('/dashboard/drinks/' + drink_items.category.toLowerCase());
 			console.log('Drink item added to Db');
 		} else {
 			return res.status(409).json({ message: "The Category You Entered Does Not Belong In The Menu!"})
