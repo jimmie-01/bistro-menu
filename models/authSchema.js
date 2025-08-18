@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { isEmail } = require('validator');
+
+// Define the user schema for authentication
+// This schema includes fields for name, email, password, and role with appropriate validations.
+// The 'role' field is an enum that restricts the values to specific roles.
 
 const userSchema = new Schema({
   name: {
@@ -10,6 +15,8 @@ const userSchema = new Schema({
 	type: String,
 	required: [true, 'Email is required'],
 	unique: true,
+	validate: [isEmail, 'Please enter a valid email address'],
+	trim: true,
 	lowercase: true,
   },
   password: {
