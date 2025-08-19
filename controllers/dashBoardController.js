@@ -125,7 +125,7 @@ module.exports.post_create_menu = async (req, res) => {
 			// Redirect to the category page after adding the item
 			// This assumes that the category is a valid route in your application
 			// res.status(201).redirect(`/dashboard/${lowerCategory}`);
-			res.status(201).redirect(`/dashboard/${category.toLowerCase}`);
+			res.status(201).redirect(`/dashboard/${category.toLowerCase()}`);
 			console.log('data added to db');
 		} else if(isValidEnumValue(DrinkMenu.schema, 'category', upperCategory)) {
 			const drinkItemExists = await DrinkMenu.findOne({ name });

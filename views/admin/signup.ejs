@@ -1,14 +1,24 @@
 <html lang="en">
-
+<%- include('../partials/header.ejs') %>
 <body>
-	<form action="dashboard/login" method="post">
+	<form action="/register" method="POST">
+		<%- include('../partials/admin-nav.ejs') %>
 		<h2>Signup</h2>
+		<label for="name">Name</label>
+		<input type="text" name="name" required />
 		<label for="email">Email</label>
 		<input type="text" name="email" required />
 		<div class="email error"></div>
 		<label for="password">Password</label>
 		<input type="password" name="password" required />
 		<div class="password error"></div>
+		<label for="role">Role</label>
+		<select name="role" required>
+			<option value="floor manager">Floor Manager</option>
+			<option value="general manager">General Manager</option>
+			<option value="owner">Owner</option>
+			<option value="cashier">Cashier</option>
+		</select><br/>
 		<button>Sign up</button>
 	</form>
 </body>
