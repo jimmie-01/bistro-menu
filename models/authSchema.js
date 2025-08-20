@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 const { isEmail } = require('validator');
 
 // Define the user schema for authentication
@@ -40,3 +41,11 @@ module.exports = User;
 // It includes fields for name, email, password, and role, with appropriate validations and defaults.
 // The 'Auth' model can be used to interact with the authentication collection in MongoDB.
 //
+
+//Fire a function before saving doc to db
+userSchema.pre('save', async function(next) {
+	const salt = await bcrypt.genSalt();
+	const hashedPassword = await bcrypt.hash(this.password, salt);
+
+	next();
+});
