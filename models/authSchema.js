@@ -32,9 +32,6 @@ const userSchema = new Schema({
   }
 }, { timestamps: true });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
 // --- IGNORE ---
 
 // This schema defines the structure of the authentication data in the database.
@@ -49,3 +46,8 @@ userSchema.pre('save', async function(next) {
 
 	next();
 });
+
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
