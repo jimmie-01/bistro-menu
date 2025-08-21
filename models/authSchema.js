@@ -27,8 +27,8 @@ const userSchema = new Schema({
   },
   role: {
 	type: String,
-	enum: ['Floor Manager', 'General Manager','Owner', 'Cashier'],
-	default: 'user',
+	enum: ['floor manager', 'general manager','owner', 'cashier'],
+	default: 'floor manager',
   }
 }, { timestamps: true });
 
@@ -45,7 +45,7 @@ module.exports = User;
 //Fire a function before saving doc to db
 userSchema.pre('save', async function(next) {
 	const salt = await bcrypt.genSalt();
-	const hashedPassword = await bcrypt.hash(this.password, salt);
+	this.password = await bcrypt.hash(this.password, salt);
 
 	next();
 });
