@@ -97,7 +97,7 @@ module.exports.get_create_menu = (req, res) => {
 }
 
 /**
- * POST - Post Create Menu
+ * POST - Add Items to Menu
  */
 module.exports.post_create_menu = async (req, res) => {
 	try {
@@ -119,12 +119,7 @@ module.exports.post_create_menu = async (req, res) => {
 			});
 			// Redirect to the category page after adding the item
 			// This assumes that the category is a valid route in your application
-			// If you want to redirect to a specific category page, you can modify the URL accordingly
-			// For example, if you want to redirect to the category page:
 			// const lowerCategory = menu_items.category.toLowerCase();
-			// Redirect to the category page after adding the item
-			// This assumes that the category is a valid route in your application
-			// res.status(201).redirect(`/dashboard/${lowerCategory}`);
 			res.status(201).redirect(`/dashboard/${category.toLowerCase()}`);
 			console.log('data added to db');
 		} else if(isValidEnumValue(DrinkMenu.schema, 'category', upperCategory)) {
