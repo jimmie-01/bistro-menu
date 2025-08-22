@@ -1,5 +1,10 @@
 const User = require('../models/authSchema');
 
+// Handle Errors
+const handleErrors = (err) => {
+	console.log(err.message, err.code);
+	let errors = { name: '', email: '', password: '', role: '' };
+}
 /**
  * GET - Function to render the login page 
  */
@@ -44,9 +49,10 @@ module.exports.post_register = async (req, res) => {
 		});
 		res.status(201).redirect('/login');
 
-	} catch (error) {
-		console.error('Registration error:', error);
-		res.status(500).send('Internal Server Error');
+	} catch (err) {
+		const errors = handleErrors(err);
+		console.log(errors);
+		res.status(500).json({ errors });
 		return;
 	}
 }
