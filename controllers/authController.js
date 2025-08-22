@@ -33,15 +33,16 @@ module.exports.get_register = (req, res) => {
 module.exports.post_register = async (req, res) => {
 	const { name, email, password, role } = req.body;
 	const lowerCaseRole = role.toLowerCase();
+	console.log('Registering user:', { name, email, password, role: lowerCaseRole });
 	// Logic to register user
 	try{
 		const user = await User.create({
 			name,
 			email,
 			password,
-			lowerCaseRole,
+			role: lowerCaseRole,
 		});
-		res.status(201).redirect('admin/login');
+		res.status(201).redirect('/login');
 
 	} catch (error) {
 		console.error('Registration error:', error);
