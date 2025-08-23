@@ -38,10 +38,16 @@ module.exports.get_login = (req, res) => {
 /**
  * POST - Function to handle user login
  */
-module.exports.post_login = (req, res) => {
+module.exports.post_login = async(req, res) => {
 	const { email, password } = req.body;
 	// Logic to authenticate user
-	res.redirect('/dashboard');
+	try {
+		const user = await User.login(email, password);
+		res.redirect('/dashboard');
+	} catch (err) {
+		const errors = handleErrors(err);
+		res.status(400).json({ errors });
+	}
 };
 
 /** 
