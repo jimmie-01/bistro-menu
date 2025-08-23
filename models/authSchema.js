@@ -49,7 +49,7 @@ userSchema.pre('save', async function(next) {
 
 //Static method to login user
 userSchema.statics.login = async function (email, password) {
-	const user = await this.findOne({ eamil });
+	const user = await this.findOne({ email git });
 	if (user) {
 		const auth = await bcrypt.compare( password, user.password);
 		if (auth) {
