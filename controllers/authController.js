@@ -3,7 +3,28 @@ const User = require('../models/authSchema');
 // Handle Errors
 const handleErrors = (err) => {
 	console.log(err.message, err.code);
-	let errors = { name: '', email: '', password: '', role: '' };
+	let errors = { email: '', password: ''};
+
+	//Email Error
+	if (err.message === 'Incorrect Email') {
+		errors.email = 'That email is not registered';
+	};
+	//Password Error
+	if (err.message === 'Incorrect Password') {
+		errors.password = 'That password is incorrect';
+	}
+	//Duplicate Error Code
+	if (err.code === 11000) {
+		errors.email = 'That email is already registered';
+		return errors;
+	}
+	//Validation Errors
+	if (err.message.includes('user validation failed')) {
+		Object.values(err.errors).forEach(({ properties }) => {
+			errors[properties.path] = properties.message;
+		});
+	}
+	return errors;
 }
 /**
  * GET - Function to render the login page 
