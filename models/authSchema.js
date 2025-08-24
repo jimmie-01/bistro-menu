@@ -41,6 +41,8 @@ const userSchema = new Schema({
 
 //Fire a function before saving doc to db
 userSchema.pre('save', async function(next) {
+	//If password isn't changed, to not hash the password again
+	if (!this.isModified('password')) return next();
 	const salt = await bcrypt.genSalt();
 	this.password = await bcrypt.hash(this.password, salt);
 
@@ -49,7 +51,7 @@ userSchema.pre('save', async function(next) {
 
 //Static method to login user
 userSchema.statics.login = async function (email, password) {
-	const user = await this.findOne({ email git });
+	const user = await this.findOne({ email });
 	if (user) {
 		const auth = await bcrypt.compare( password, user.password);
 		if (auth) {
