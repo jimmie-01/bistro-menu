@@ -74,7 +74,7 @@ module.exports.post_register = async (req, res) => {
 			password,
 			role: lowerCaseRole,
 		});
-		res.status(201).redirect('/login');
+		res.status(201).json({ user: user._id});
 
 	} catch (err) {
 		const errors = handleErrors(err);
