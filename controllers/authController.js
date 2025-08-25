@@ -43,7 +43,7 @@ module.exports.post_login = async(req, res) => {
 	// Logic to authenticate user
 	try {
 		const user = await User.login(email, password);
-		res.redirect('/dashboard');
+		res.status(200).json({ user: user._id });
 	} catch (err) {
 		const errors = handleErrors(err);
 		res.status(400).json({ errors });
