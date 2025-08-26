@@ -62,6 +62,12 @@ userSchema.statics.login = async function (email, password) {
 	throw Error("Incorrect Email");
 }
 
+userSchema.methods.getSignedJwtToken = function() {
+	return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+		expiresIn: process.env.JWT_EXPIRATION
+	});
+}
+
 
 const User = mongoose.model('User', userSchema);
 
