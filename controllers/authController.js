@@ -94,3 +94,11 @@ module.exports.post_register = async (req, res) => {
 		return;
 	}
 }
+
+// If you're storing tokens in cookies, consider setting these options on the response when setting the cookie:
+// res.cookie('token', jwtToken, {
+// 	httpOnly: true,       // Prevents JS access
+// 	secure: true,         // Ensures it's only sent over HTTPS
+// 	sameSite: 'Strict',   // Prevents CSRF
+// 	maxAge: 24 * 60 * 60 * 1000 // 1 day
+// });
