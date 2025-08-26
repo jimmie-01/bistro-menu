@@ -43,7 +43,12 @@ module.exports.post_login = async(req, res) => {
 	// Logic to authenticate user
 	try {
 		const user = await User.login(email, password);
-		res.status(200).json({ user: user._id });
+		// Create token
+		const token = user.getSignedJwtToken();
+		res.status(200).json({
+			token, 
+			user: user._id 
+		});
 	} catch (err) {
 		const errors = handleErrors(err);
 		res.status(400).json({ errors });
@@ -74,7 +79,13 @@ module.exports.post_register = async (req, res) => {
 			password,
 			role: lowerCaseRole,
 		});
-		res.status(201).json({ user: user._id});
+		// Create token
+		const token = user.getSignedJwtToken();
+
+		res.status(201).json({ 
+			token,
+			user: user._id
+		});
 
 	} catch (err) {
 		const errors = handleErrors(err);
