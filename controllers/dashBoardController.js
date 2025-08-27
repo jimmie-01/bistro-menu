@@ -17,7 +17,7 @@ module.exports.get_dashboard  = async(req, res) => {
 			}
 			itemsByCategory[item.category].push(item);
 		});
-		res.render('admin/dashBoard', {
+		res.render('dashboard/dashBoard', {
 			 title: "Admin Panel",
 			 itemsByCategory
 			});
@@ -41,7 +41,7 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 			}
 			itemsByCategory[item.category].push(item);
 		});
-		res.render('admin/dashBoardDrinks', {
+		res.render('dashboard/dashBoardDrinks', {
 			 title: "Drinks",
 			 itemsByCategory
 			});
@@ -60,7 +60,7 @@ module.exports.get_category_items = async(req, res) => {
 		const category = req.params.category;
 
 		const items = await MenuItem.find({ category }).sort({category: 1});
-		res.status(201).render('admin/details', {
+		res.status(201).render('dashboard/details', {
 			title: category,
 			category,
 			items
@@ -79,7 +79,7 @@ module.exports.get_category_drinkItems = async(req, res) => {
 		const category = req.params.category;
 
 		const items = await DrinkMenu.find({ category }).sort({category: 1});
-		res.status(201).render('admin/details', {
+		res.status(201).render('dashboard/details', {
 			title: category,
 			category,
 			items
@@ -93,7 +93,7 @@ module.exports.get_category_drinkItems = async(req, res) => {
  * GET - Create Menu Page(Food)
  */
 module.exports.get_create_menu = (req, res) => {
-	res.render('admin/create', { title: "Add item" });
+	res.render('dashboard/create', { title: "Add item" });
 }
 
 /**
@@ -155,12 +155,12 @@ module.exports.get_edit_item = async(req, res) => {
 		const item = await MenuItem.findOne({ name });
 		if (!item) {
 			const item = await DrinkMenu.findOne({ name });
-			res.status(201).render('admin/edit-items', {
+			res.status(201).render('dashboard/edit-items', {
 				title: "Update Item",
 				item
 			});
 		}
-		res.status(201).render('admin/edit-items', {
+		res.status(201).render('dashboard/edit-items', {
 				title: "Update Item",
 				item
 			});
