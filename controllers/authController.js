@@ -47,7 +47,7 @@ module.exports.post_login = async(req, res) => {
 		const token = user.getSignedJwtToken();
 		res.status(200).json({
 			token, 
-			user: user._id 
+			user
 		});
 	} catch (err) {
 		const errors = handleErrors(err);

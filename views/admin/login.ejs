@@ -1,7 +1,6 @@
 <html lang="en">
 <%- include('../partials/header.ejs') %>
 <body>
-	<%- include('../partials/admin-nav.ejs') %>
 	<form action="/login" method="POST">
 		<h2>Login</h2>
 		<label for="email">Email</label>
@@ -42,6 +41,8 @@
 					passwordError.textContent = data.errors.password;
 				}
 				if (data.user) {
+					// save token locally
+					localStorage.setItem('token', data.token);
 					// Redirect to home page
 					location.assign('/dashboard');
 				}
