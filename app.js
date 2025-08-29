@@ -6,7 +6,6 @@ const mainRoutes = require('./routes/mainRoute');
 const dashBoard = require('./routes/dashBoard');
 const authRoute = require('./routes/authRoute');
 const { default: mongoose } = require('mongoose');
-const { protect, authorize } = require('./utils/authMiddleware');
 
 const PORT = process.env.PORT || 3000;
 
@@ -29,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('', mainRoutes);
 app.use('', authRoute);
-app.use('', protect, dashBoard);
+app.use('', dashBoard);
 // app.use('', require('./routes/authRoute'));
 
 // //404 Page

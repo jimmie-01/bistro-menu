@@ -46,6 +46,7 @@ module.exports.post_login = async(req, res) => {
 		// Create token
 		const token = user.getSignedJwtToken();
 		res.status(200).json({
+			success: true,
 			token, 
 			user
 		});
