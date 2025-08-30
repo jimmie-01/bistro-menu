@@ -1,5 +1,4 @@
 const User = require('../models/authSchema');
-const cookie = require('cookie-parser');
 
 // Handle Errors
 const handleErrors = (err) => {
