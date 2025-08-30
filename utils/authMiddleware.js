@@ -4,16 +4,11 @@ const User = require('../models/authSchema');
 
 const protect = async (req, res, next) => {
 	try {
-		let token;
-
-		if ( req.headers.authorization && 
-			req.headers.authorization.startsWith('Bearer')
-		) {
-			//Get token from header
-			token = req.headers.authorization.split(' ')[1];
-		}
+		token = req.cookies.token;
 		if (!token) {
-			return res.status(401).json({ message: 'Not Authorized to access this route'});
+			return res.status(401).json({
+				message: 'No Token, Authoriztion Denied'
+			});
 		}
 		try {
 			// Verify Token

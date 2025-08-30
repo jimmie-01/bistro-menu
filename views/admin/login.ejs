@@ -40,15 +40,17 @@
 					emailError.textContent = data.errors.email;
 					passwordError.textContent = data.errors.password;
 				}
-				// save token locally
-				localStorage.setItem('token', data.token);
-				// Redirect to home page
+
+				if (!res.ok) {
+					throw new Error(data.message || 'Login Failed');
+				}
+				// Redirect after successful login
 				location.assign('/dashboard');
 			}
 			catch (err) {
 				console.log(err);
 			}
-		});
+		});			
 	</script>
 </body>
 </html>

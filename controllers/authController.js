@@ -1,4 +1,5 @@
 const User = require('../models/authSchema');
+const cookie = require('cookie-parser');
 
 // Handle Errors
 const handleErrors = (err) => {
@@ -45,11 +46,13 @@ module.exports.post_login = async(req, res) => {
 		const user = await User.login(email, password);
 		// Create token
 		const token = user.getSignedJwtToken();
-		res.status(200).json({
-			success: true,
-			token, 
-			user
+		res.cookie('token', token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production', // Set to true in production
+			sameSite: 'Strict',
+			maxAge: 24 * 60 * 60 * 1000 // 1 day
 		});
+		res.status(200).json({ user: user._id });
 	} catch (err) {
 		const errors = handleErrors(err);
 		res.status(400).json({ errors });
@@ -103,3 +106,29 @@ module.exports.post_register = async (req, res) => {
 // 	sameSite: 'Strict',   // Prevents CSRF
 // 	maxAge: 24 * 60 * 60 * 1000 // 1 day
 // });
+// const getProtectedData = async () => {
+			
+// 			//Making a Protected Request
+// 			try {
+// 				//Retrieve token from storage
+// 				const token  = localStorage.getItem('token');
+
+// 				const res = await fetch('/dashboard', {
+// 					method: 'GET',
+// 					headers: {
+// 						'Authorization': `Bearer ${token}`,
+// 						'Content-Type': 'application/json',
+// 					}
+// 				});
+				
+// 				if (res) {
+// 					const user = await res.json();
+// 					console.log('Protected data: ', user);
+// 					//Redirect to dashboard
+// 					location.assign('/dashboard');
+// 				}
+// 			}
+// 			catch (error) {
+// 				console.error('Protected Request Error: ', error);
+// 			}
+// 		}
