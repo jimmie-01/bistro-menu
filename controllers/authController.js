@@ -98,6 +98,51 @@ module.exports.post_register = async (req, res) => {
 	}
 }
 
+/**
+ * GET - Function to handle user logout
+ */
+module.exports.logout = (req, res) => {
+	res.cookie('token', '', { maxAge: 1 });
+	res.redirect('/');
+};
+
+/**
+ * Note on Token Storage:
+ * 
+ * Storing tokens in localStorage can expose them to XSS attacks, as malicious scripts can access localStorage.
+ * A more secure approach is to store tokens in HTTP-only cookies, which are not accessible via JavaScript.
+ * This helps mitigate the risk of token theft through XSS vulnerabilities.
+ * 
+ * If you choose to use cookies, ensure they are set with the HttpOnly and Secure flags, and consider using the SameSite attribute to prevent CSRF attacks.
+ * 
+ * Example of setting a cookie with these attributes is shown below.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // If you're storing tokens in cookies, consider setting these options on the response when setting the cookie:
 // res.cookie('token', jwtToken, {
 // 	httpOnly: true,       // Prevents JS access
