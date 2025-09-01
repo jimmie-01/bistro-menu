@@ -33,7 +33,7 @@ app.use('', authRoute);
 app.use('', dashBoard);
 // app.use('', require('./routes/authRoute'));
 
-// //404 Page
-// app.use((req, res) => {
-// 	res.status(404).render('404', { title: '404' });
-// });
+//404 Page
+app.use((req, res) => {
+	res.status(404).render('404', { title: '404' });
+});

@@ -22,7 +22,7 @@ module.exports.get_dashboard  = async(req, res) => {
 			 itemsByCategory
 			});
 	} catch (error) {
-		console.log(error);
+		res.status(501).send("Internal Sever Error", error);
 	}
 }
 
@@ -46,7 +46,7 @@ module.exports.get_dashboard_drinks = async(req, res) => {
 			 itemsByCategory
 			});
 	} catch (error) {
-		console.log(error);
+		res.status(501).send("Internal Sever Error", error);
 	}
 }
 
@@ -66,7 +66,7 @@ module.exports.get_category_items = async(req, res) => {
 			items
 		});
 	} catch (error) {
-		console.log(error);
+		res.status(501).send("Internal Sever Error", error);
 	};
 }
 
@@ -85,7 +85,7 @@ module.exports.get_category_drinkItems = async(req, res) => {
 			items
 		});
 	} catch (error) {
-		console.log(error);
+		res.status(501).send("Internal Sever Error", error);
 	};
 }
 
@@ -140,7 +140,7 @@ module.exports.post_create_menu = async (req, res) => {
 			return res.status(409).json({ message: "The Category You Entered Does Not Belong In The Menu!"})
 		}
 	} catch (error) {
-		console.log(error);
+		res.status(500).send('Internal Server Error ', error);
 	};
 }
 
@@ -205,6 +205,7 @@ module.exports.delete_item = async(req, res) => {
 		}
 		res.status(201).redirect('/dashboard');
 	} catch (error) {
+		res.status(501).send("Internal Sever Error", error);
 		console.log(error);
 	}
 };
