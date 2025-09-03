@@ -84,7 +84,11 @@ module.exports.post_register = async (req, res) => {
 		});
 		// Create token
 		const token = user.getSignedJwtToken();
-
+		res.cookie('token', token, {
+			httpOnly: true,
+			sameSite: 'Strict',
+			maxAge: 24 * 60 * 60 * 1000, // 1 day
+		})
 		res.status(201).json({ 
 			token,
 			user: user._id
