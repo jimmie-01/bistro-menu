@@ -30,11 +30,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', checkUser);
+app.get(['/','/about', '/contact', '/menu/food','/menu/drinks'], checkUser);
 app.use('', mainRoutes);
 app.use('', authRoute);
 app.use('', dashBoard);
-
 //404 Page
 app.use((req, res) => {
 	res.status(404).render('404', { title: '404' });
