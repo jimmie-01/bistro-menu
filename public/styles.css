@@ -13,3 +13,25 @@ p, h1, h2, h3, a, ul{
 	text-decoration: none;
 	color: #222;
 }
+
+/* Nav & Footer styles*/
+nav{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 60px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+	text-transform: uppercase;
+}
+
+nav ul{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+nav li{
+	list-style-type: none;
+	margin-left: 20px;
+	font-weight: bolder;
+}
