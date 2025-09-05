@@ -2,30 +2,32 @@
 <%- include('./partials/header.ejs') %>
 <body>
 	<%- include('./partials/nav.ejs') %>
-	<nav>
-		<ul>
-			<li><a href="/menu/food">Food</a></li>
-			<li><a href="#">Drinks</a></li>
-		</ul>
-	</nav>
-	<% Object.keys(itemsByCategory).forEach(category =>{ %>
-		<div class="category-section">
-			<h2 class="category"><%= category %></h2>
-
-			<div class="items-container">
-				<% itemsByCategory[category].forEach(item => { %>
-					<div class="item-card">
-						<h3><%= item.name %></h3>
-						<p><%= item.description %></p>
-						<p>₦<%= item.price.toFixed(2)%></p>
-					</div>
-				<% }) %>
+	<div class="content">
+		<nav>
+			<ul>
+				<li><a href="/menu/food">Food</a></li>
+				<li><a href="#">Drinks</a></li>
+			</ul>
+		</nav>
+		<% Object.keys(itemsByCategory).forEach(category =>{ %>
+			<div class="category-section">
+				<h2 class="category"><%= category %></h2>
+	
+				<div class="items-container">
+					<% itemsByCategory[category].forEach(item => { %>
+						<div class="item-card">
+							<h3><%= item.name %></h3>
+							<p><%= item.description %></p>
+							<p>₦<%= item.price.toFixed(2)%></p>
+						</div>
+					<% }) %>
+				</div>
 			</div>
-		</div>
-	<%}) %>
-	<% if (Object.keys(itemsByCategory).length === 0) {%>
-		<p>No items found!</p>
-	<%}%>
+		<%}) %>
+		<% if (Object.keys(itemsByCategory).length === 0) {%>
+			<p>No items found!</p>
+		<%}%>
+	</div>
 
 	<%- include('./partials/footer.ejs') %>
 </body>
