@@ -5,6 +5,7 @@ body {
 	margin: 20px auto;
 	padding: 0 20px;
 	font-family: 'Noto Serif', serif;
+	background-image: url("/img-noise-361x3701.png");
 }
 
 p, h1, h2, h3, a, ul{
