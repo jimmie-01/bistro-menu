@@ -36,3 +36,6 @@ nav li{
 	margin-left: 20px;
 	font-weight: bolder;
 }
+nav h1 {
+	font-size: 3em;
+}
